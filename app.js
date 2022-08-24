@@ -9,7 +9,7 @@ const paymentRoutes=require('./routes/payment');
 const mongoose = require('mongoose');
 const cors=require('cors')
 
-const DBCONNECTIONSTRING="mongodb+srv://yash:yash@zomato.t3zzf.mongodb.net/zomato40"
+const DBCONNECTIONSTRING= process.env.MONGO_URI || "mongodb://localhost/Assingment_6"
 
 //connect MongoDB
 mongoose.connect(
@@ -21,8 +21,8 @@ mongoose.connect(
   );
   
 
-//PORT
-const PORT = 3038;
+//start the express server PORT
+const PORT = process.env.PORT || 3038;
 
 
 
@@ -38,6 +38,17 @@ app.use("/location", locationRoutes);
 app.use("/mealtype", mealtypeRoutes);
 app.use("/menu",menuRoutes)
 app.use("/pay",paymentRoutes)
+
+
+
+//heroku configurations:
+if(process.env.NODE_ENV="production"){
+  app.use(express.static("frontend/build"));
+  // const path = require("path");
+  // app.get("*",(req,res)=>{
+  //   res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
+  // })
+}
 
 app.listen(PORT, () => {
     console.log(`app running on PORT:${PORT}`);
