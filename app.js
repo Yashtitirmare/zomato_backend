@@ -9,7 +9,7 @@ const paymentRoutes=require('./routes/payment');
 const mongoose = require('mongoose');
 const cors=require('cors')
 
-const DBCONNECTIONSTRING= process.env.MONGO_URI || "mongodb://localhost/Assingment_6"
+const DBCONNECTIONSTRING= process.env.MONGO_URI
 
 //connect MongoDB
 mongoose.connect(
@@ -41,14 +41,7 @@ app.use("/pay",paymentRoutes)
 
 
 
-//heroku configurations:
-if(process.env.NODE_ENV="production"){
-  app.use(express.static("frontend/build"));
-  const path = require("path");
-  app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
-  })
-}
+
 
 app.listen(PORT, () => {
     console.log(`app running on PORT:${PORT}`);
