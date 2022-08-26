@@ -8,8 +8,9 @@ const menuRoutes = require('./routes/menu');
 const paymentRoutes=require('./routes/payment');
 const mongoose = require('mongoose');
 const cors=require('cors')
+require('dotenv').config();
 
-const DBCONNECTIONSTRING= process.env.MONGO_URI
+const DBCONNECTIONSTRING= process.env.MONGO_URI;
 
 //connect MongoDB
 mongoose.connect(
@@ -22,7 +23,7 @@ mongoose.connect(
   
 
 //start the express server PORT
-const PORT = process.env.PORT || 3038;
+const PORT = 3038;
 
 
 
