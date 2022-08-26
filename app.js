@@ -23,7 +23,7 @@ mongoose.connect(
   
 
 //start the express server PORT
-const PORT = 3038;
+const PORT = process.env.PORT || 3038;
 
 
 
